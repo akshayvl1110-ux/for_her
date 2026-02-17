@@ -6,69 +6,89 @@
 
 <style>
 
+/* Romantic neon dark + bright theme */
+
 body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
-background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+background: linear-gradient(135deg,#0f051d,#1a0b2e,#ff0f5b,#ff4b7d);
+background-size:400% 400%;
+animation:bgMove 12s infinite alternate;
 color:white;
+scroll-behavior:smooth;
 overflow-x:hidden;
 }
 
-/* Welcome screen */
+@keyframes bgMove{
+0%{background-position:left;}
+100%{background-position:right;}
+}
 
-#welcome{
+section{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
 text-align:center;
+padding:20px;
 }
+
+/* Buttons */
 
 button{
 padding:15px 35px;
-font-size:20px;
+font-size:18px;
 border:none;
-border-radius:12px;
-background:#ff4b7d;
+border-radius:30px;
+background: linear-gradient(45deg,#ff0f5b,#ff7aa2);
 color:white;
 cursor:pointer;
+box-shadow:0 0 20px rgba(255,0,90,0.7);
 transition:0.3s;
 }
 
 button:hover{
 transform:scale(1.1);
+box-shadow:0 0 40px rgba(255,0,90,1);
 }
 
-/* Main content */
-
-#main{
-display:none;
-padding:40px;
-text-align:center;
-animation:fadeIn 2s;
-}
+/* Card */
 
 .card{
-background: rgba(255,255,255,0.1);
+background: rgba(0,0,0,0.4);
 padding:40px;
 border-radius:20px;
-backdrop-filter: blur(10px);
+backdrop-filter: blur(15px);
+box-shadow:0 0 30px rgba(255,0,90,0.5);
 max-width:700px;
-margin:auto;
 }
 
-/* Photos */
+/* Photo Booth */
 
-.gallery img{
-width:220px;
-border-radius:15px;
-margin:10px;
-transition:0.4s;
+.photobooth{
+display:flex;
+gap:30px;
 }
 
-.gallery img:hover{
-transform:scale(1.1);
+.strip{
+background:white;
+padding:10px;
+border-radius:10px;
+box-shadow:0 0 25px rgba(255,0,90,0.8);
+}
+
+.strip img{
+width:180px;
+display:block;
+margin-bottom:10px;
+border-radius:5px;
+}
+
+/* Final screen */
+
+#final{
+background:black;
 }
 
 /* Floating hearts */
@@ -78,73 +98,80 @@ position:fixed;
 bottom:-10px;
 font-size:20px;
 animation: floatUp linear infinite;
-opacity:0.6;
 }
 
 @keyframes floatUp{
-from{
-transform:translateY(0);
-}
-to{
-transform:translateY(-120vh);
-}
-}
-
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
+from{transform:translateY(0);}
+to{transform:translateY(-120vh);}
 }
 
 </style>
 </head>
-
 <body>
 
-<!-- Welcome Screen -->
+<!-- Welcome -->
 
-<div id="welcome">
+<section>
 
-<h1>I made something for you ❤️</h1>
+<h1 style="font-size:50px;">Hi my love ❤️</h1>
 
-<button onclick="startSurprise()">Click here</button>
+<p>This is our little world</p>
 
-</div>
+<button onclick="goLetter()">Enter</button>
 
-<!-- Main Content -->
+</section>
 
-<div id="main">
+<!-- Love Letter -->
+
+<section id="letter">
 
 <div class="card">
 
-<h1>Happy Anniversary ❤️</h1>
+<h1>My Love Letter</h1>
 
-<p id="loveText"></p>
+<p id="text"></p>
 
-<p id="counter"></p>
+<button onclick="goMemories()">Us through the years ↓</button>
 
 </div>
 
-<br><br>
+</section>
 
-<h2>Our Memories 📸</h2>
+<!-- Photo Booth Memories -->
 
-<div class="gallery">
+<section id="memories">
 
+<h1>Our Photo Booth 📸</h1>
+
+<div class="photobooth">
+
+<div class="strip">
 <img src="photo1.jpg">
 <img src="photo2.jpg">
 <img src="photo3.jpg">
+</div>
+
+<div class="strip">
+<img src="photo4.jpg">
+<img src="photo5.jpg">
+<img src="photo6.jpg">
+</div>
 
 </div>
 
-<br><br>
+<button onclick="goFinal()">Final Surprise ❤️</button>
 
-<button onclick="finalSurprise()">Click for final surprise ❤️</button>
+</section>
 
-<p id="finalMessage"></p>
+<!-- Final -->
 
-</div>
+<section id="final">
 
-<!-- Music -->
+<h1 style="font-size:60px;">I Love You ❤️</h1>
+
+<p style="font-size:25px;">Forever and Always.</p>
+
+</section>
 
 <audio id="music" loop>
 <source src="music.mp3" type="audio/mpeg">
@@ -152,90 +179,52 @@ to{opacity:1}
 
 <script>
 
-/* Start surprise */
-
-function startSurprise(){
-
-document.getElementById("welcome").style.display="none";
-document.getElementById("main").style.display="block";
-
+function goLetter(){
+document.getElementById("letter").scrollIntoView();
 document.getElementById("music").play();
-
-typeWriter();
-startHearts();
-
+typeText();
+hearts();
 }
 
-/* Typing love letter */
+function goMemories(){
+document.getElementById("memories").scrollIntoView();
+}
 
-const message = `From the moment you came into my life,
-everything became beautiful.
+function goFinal(){
+document.getElementById("final").scrollIntoView();
+}
 
-You are my happiness, my peace,
-and my favorite person in the world.
+/* typing text */
 
-Thank you for being mine.
+let msg=`You are my happiness,
+my peace,
+my everything.
 
-Happy Anniversary, my love ❤️`;
+This is our story.
+And I will love you forever. ❤️`;
 
 let i=0;
 
-function typeWriter(){
-
-if(i<message.length){
-
-document.getElementById("loveText").innerHTML+=message.charAt(i);
-
+function typeText(){
+if(i<msg.length){
+document.getElementById("text").innerHTML+=msg.charAt(i);
 i++;
-
-setTimeout(typeWriter,40);
-
+setTimeout(typeText,40);
+}
 }
 
-}
+/* hearts */
 
-/* Relationship counter */
-
-const startDate = new Date("2023-02-17"); // CHANGE THIS DATE
-
-const today = new Date();
-
-const diffDays = Math.floor((today-startDate)/(1000*60*60*24));
-
-document.getElementById("counter").innerHTML =
-"<br>We've been together for "+diffDays+" days ❤️";
-
-/* Floating hearts */
-
-function startHearts(){
-
+function hearts(){
 setInterval(()=>{
-
-let heart=document.createElement("div");
-
-heart.innerHTML="❤️";
-
-heart.className="heart";
-
-heart.style.left=Math.random()*100+"vw";
-
-heart.style.animationDuration=(Math.random()*3+3)+"s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),6000);
-
+let h=document.createElement("div");
+h.innerHTML="❤️";
+h.className="heart";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
 },300);
-
-}
-
-/* Final surprise */
-
-function finalSurprise(){
-
-document.getElementById("finalMessage").innerHTML=
-"<br>I will love you forever. ❤️";
-
 }
 
 </script>
