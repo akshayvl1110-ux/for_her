@@ -2,229 +2,187 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For My Love ❤️</title>
+<title>Happy Anniversary ❤️</title>
 
 <style>
 
-/* Romantic neon dark + bright theme */
-
+/* Prevent scroll completely */
 body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
-background: linear-gradient(135deg,#0f051d,#1a0b2e,#ff0f5b,#ff4b7d);
-background-size:400% 400%;
-animation:bgMove 12s infinite alternate;
+background: linear-gradient(135deg,#0f051d,#ff0f5b,#1a0b2e);
 color:white;
-scroll-behavior:smooth;
-overflow-x:hidden;
+overflow:hidden;
 }
 
-@keyframes bgMove{
-0%{background-position:left;}
-100%{background-position:right;}
-}
-
-section{
+/* Each screen full page centered */
+.screen{
+position:absolute;
+width:100%;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
 text-align:center;
-padding:20px;
 }
 
-/* Buttons */
-
-button{
-padding:15px 35px;
-font-size:18px;
-border:none;
-border-radius:30px;
-background: linear-gradient(45deg,#ff0f5b,#ff7aa2);
-color:white;
-cursor:pointer;
-box-shadow:0 0 20px rgba(255,0,90,0.7);
-transition:0.3s;
+/* Hide screens */
+.hidden{
+display:none;
 }
 
-button:hover{
-transform:scale(1.1);
-box-shadow:0 0 40px rgba(255,0,90,1);
-}
-
-/* Card */
-
+/* Card style */
 .card{
 background: rgba(0,0,0,0.4);
 padding:40px;
 border-radius:20px;
-backdrop-filter: blur(15px);
-box-shadow:0 0 30px rgba(255,0,90,0.5);
-max-width:700px;
+box-shadow:0 0 30px rgba(255,0,90,0.7);
+max-width:600px;
 }
 
-/* Photo Booth */
+/* Buttons */
+button{
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:25px;
+background: linear-gradient(45deg,#ff0f5b,#ff7aa2);
+color:white;
+cursor:pointer;
+margin-top:20px;
+}
 
+button:hover{
+transform:scale(1.1);
+}
+
+/* Photo booth */
 .photobooth{
 display:flex;
-gap:30px;
+gap:20px;
 }
 
-.strip{
-background:white;
-padding:10px;
+.photobooth img{
+width:150px;
 border-radius:10px;
-box-shadow:0 0 25px rgba(255,0,90,0.8);
-}
-
-.strip img{
-width:180px;
-display:block;
-margin-bottom:10px;
-border-radius:5px;
-}
-
-/* Final screen */
-
-#final{
-background:black;
-}
-
-/* Floating hearts */
-
-.heart{
-position:fixed;
-bottom:-10px;
-font-size:20px;
-animation: floatUp linear infinite;
-}
-
-@keyframes floatUp{
-from{transform:translateY(0);}
-to{transform:translateY(-120vh);}
 }
 
 </style>
 </head>
 <body>
 
-<!-- Welcome -->
+<!-- Screen 1 Welcome -->
 
-<section>
-
-<h1 style="font-size:50px;">Hi my love ❤️</h1>
-
-<p>This is our little world</p>
-
-<button onclick="goLetter()">Enter</button>
-
-</section>
-
-<!-- Love Letter -->
-
-<section id="letter">
+<div id="welcome" class="screen">
 
 <div class="card">
 
-<h1>My Love Letter</h1>
+<h1>Happy Anniversary ❤️</h1>
 
-<p id="text"></p>
+<p>I made this for you</p>
 
-<button onclick="goMemories()">Us through the years ↓</button>
+<button onclick="showLetter()">Open</button>
 
 </div>
 
-</section>
+</div>
 
-<!-- Photo Booth Memories -->
+<!-- Screen 2 Love Letter -->
 
-<section id="memories">
+<div id="letter" class="screen hidden">
 
-<h1>Our Photo Booth 📸</h1>
+<div class="card">
+
+<h2>My Love Letter ❤️</h2>
+
+<p>
+Happy Anniversary my love.<br><br>
+
+You are my happiness,<br>
+my peace,<br>
+and my forever.
+</p>
+
+<button onclick="showPhotos()">Our Memories 📸</button>
+
+</div>
+
+</div>
+
+<!-- Screen 3 Photo Booth -->
+
+<div id="photos" class="screen hidden">
+
+<div class="card">
+
+<h2>Our Memories</h2>
 
 <div class="photobooth">
 
-<div class="strip">
-<img src="photo1.jpeg">
-<img src="photo2.jpeg">
-<img src="photo3.jpeg">
-</div>
-
-<div class="strip">
-<img src="photo4.jpeg">
-<img src="photo5.jpeg">
-<img src="photo6.jpeg">
-</div>
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
 
 </div>
 
-<button onclick="goFinal()">Final Surprise ❤️</button>
+<br>
 
-</section>
+<div class="photobooth">
 
-<!-- Final -->
+<img src="photo4.jpg">
+<img src="photo5.jpg">
+<img src="photo6.jpg">
 
-<section id="final">
+</div>
 
-<h1 style="font-size:60px;">I Love You ❤️</h1>
+<button onclick="showFinal()">Final Surprise ❤️</button>
 
-<p style="font-size:25px;">Forever and Always.</p>
+</div>
 
-</section>
+</div>
 
-<audio id="music" loop>
+<!-- Screen 4 Final -->
+
+<div id="final" class="screen hidden">
+
+<div class="card">
+
+<h1>I Love You ❤️</h1>
+
+<p>Forever and Always.</p>
+
+</div>
+
+</div>
+
+<!-- Music -->
+
+<audio autoplay loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-function goLetter(){
-document.getElementById("letter").scrollIntoView();
-document.getElementById("music").play();
-typeText();
-hearts();
+function showLetter(){
+
+document.getElementById("welcome").classList.add("hidden");
+document.getElementById("letter").classList.remove("hidden");
+
 }
 
-function goMemories(){
-document.getElementById("memories").scrollIntoView();
+function showPhotos(){
+
+document.getElementById("letter").classList.add("hidden");
+document.getElementById("photos").classList.remove("hidden");
+
 }
 
-function goFinal(){
-document.getElementById("final").scrollIntoView();
-}
+function showFinal(){
 
-/* typing text */
+document.getElementById("photos").classList.add("hidden");
+document.getElementById("final").classList.remove("hidden");
 
-let msg=`You are my happiness,
-my peace,
-my everything.
-
-This is our story.
-And I will love you forever. ❤️`;
-
-let i=0;
-
-function typeText(){
-if(i<msg.length){
-document.getElementById("text").innerHTML+=msg.charAt(i);
-i++;
-setTimeout(typeText,40);
-}
-}
-
-/* hearts */
-
-function hearts(){
-setInterval(()=>{
-let h=document.createElement("div");
-h.innerHTML="❤️";
-h.className="heart";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=(Math.random()*3+3)+"s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},300);
 }
 
 </script>
