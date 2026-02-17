@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Anniversary ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: linear-gradient(135deg,#ff758c,#ff7eb3);
+font-family: 'Segoe UI', sans-serif;
+overflow:hidden;
+}
+
+.card{
+background: rgba(255,255,255,0.15);
+padding:50px;
+border-radius:20px;
+backdrop-filter: blur(15px);
+text-align:center;
+color:white;
+max-width:600px;
+box-shadow:0 20px 40px rgba(0,0,0,0.2);
+animation: fadeIn 2s ease;
+}
+
+h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+p{
+font-size:20px;
+line-height:1.7;
+}
+
+.heart{
+position:absolute;
+color:white;
+animation: float 6s infinite;
+opacity:0.6;
+}
+
+@keyframes float{
+0%{transform: translateY(100vh);}
+100%{transform: translateY(-10vh);}
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Happy Anniversary ❤️</h1>
+
+<p>
+Every moment with you feels magical.<br><br>
+
+You are the best thing that ever happened to me.<br><br>
+
+This little website is just for you, because you deserve something special.<br><br>
+
+I love you more than words can ever express.
+</p>
+
+<p>
+Forever yours ❤️
+</p>
+
+</div>
+
+<script>
+for(let i=0;i<20;i++){
+let heart=document.createElement("div");
+heart.innerHTML="❤";
+heart.className="heart";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+10)+"px";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
